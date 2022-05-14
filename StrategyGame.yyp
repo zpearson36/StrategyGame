@@ -2,9 +2,13 @@
   "resources": [
     {"id":{"name":"oGuiButton","path":"objects/oGuiButton/oGuiButton.yy",},"order":3,},
     {"id":{"name":"oWorldMap","path":"objects/oWorldMap/oWorldMap.yy",},"order":0,},
+    {"id":{"name":"ButtonFunctions","path":"scripts/ButtonFunctions/ButtonFunctions.yy",},"order":1,},
     {"id":{"name":"oWorldMapTile","path":"objects/oWorldMapTile/oWorldMapTile.yy",},"order":1,},
     {"id":{"name":"oGui","path":"objects/oGui/oGui.yy",},"order":2,},
     {"id":{"name":"sBckGrnd","path":"sprites/sBckGrnd/sBckGrnd.yy",},"order":0,},
+    {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},"order":5,},
+    {"id":{"name":"sExtractor","path":"sprites/sExtractor/sExtractor.yy",},"order":1,},
+    {"id":{"name":"oExtractor","path":"objects/oExtractor/oExtractor.yy",},"order":4,},
     {"id":{"name":"utils","path":"scripts/utils/utils.yy",},"order":0,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],

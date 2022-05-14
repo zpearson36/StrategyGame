@@ -9,5 +9,11 @@ for(var i = 0; i < WORLDMAPWIDTH; i++)
 		var tmp_tile = instance_create_layer(x, y, "Tiles", oWorldMapTile)
 		tmp_tile.x_pos = WORLDTILEWIDTH * i
 		tmp_tile.y_pos = WORLDTILEHEIGHT * j
+		world_grid[# i, j] = tmp_tile
 	}
+}
+
+function get_tile(_x, _y)
+{
+	return world_grid[# _x, _y]
 }

@@ -7,3 +7,8 @@ x_pos = WORLDMAPWIDTH * WORLDTILEWIDTH + 50
 y_pos = 0
 width = 300
 height = 125
+hover = false
+function tmp_func(){return -1}
+action = tmp_func
+
+development = undefined
