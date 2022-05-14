@@ -1,8 +1,11 @@
 {
   "resources": [
+    {"id":{"name":"oGuiButton","path":"objects/oGuiButton/oGuiButton.yy",},"order":3,},
     {"id":{"name":"oWorldMap","path":"objects/oWorldMap/oWorldMap.yy",},"order":0,},
     {"id":{"name":"oWorldMapTile","path":"objects/oWorldMapTile/oWorldMapTile.yy",},"order":1,},
-    {"id":{"name":"Script1","path":"scripts/Script1/Script1.yy",},"order":0,},
+    {"id":{"name":"oGui","path":"objects/oGui/oGui.yy",},"order":2,},
+    {"id":{"name":"sBckGrnd","path":"sprites/sBckGrnd/sBckGrnd.yy",},"order":0,},
+    {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":0,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [
