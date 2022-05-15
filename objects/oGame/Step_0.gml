@@ -4,6 +4,7 @@ switch(turn_phase)
 {
 	case TURNPHASE.BEGINNING:
 	{
+		alarm[0] = turn_speed
 		turn_phase = TURNPHASE.MAIN
 		break;
 	}

@@ -1,3 +1,4 @@
 /// @description Insert description here
 // You can write your code in this editor
-draw_text(room_width - 100, 50, oGame.turn_speed)
+turn_phase = TURNPHASE.END
+alarm[0] = turn_speed

@@ -13,5 +13,40 @@ function place_development(object, tile)
 
 function endturn(button)
 {
-	oGame.turn_phase = TURNPHASE.END
+	if(oGame.turn_speed == -1) oGame.turn_phase = TURNPHASE.END
+}
+
+function t_speed(button)
+{
+	switch(oGame.turn_speed)
+	{
+		case -1:
+		{
+			oGame.turn_speed = 180
+			oGame.alarm[0] = 1
+            button.text = "Turn Speed: 1"
+			break;
+		}
+		case 180:
+		{
+			oGame.turn_speed = 120
+			if(oGame.alarm[0] > 120) oGame.alarm[0] = 120
+            button.text = "Turn Speed: 2"
+			break;
+		}
+		case 120:
+		{
+			oGame.turn_speed = 60
+			if(oGame.alarm[0] > 60) oGame.alarm[0] = 60
+            button.text = "Turn Speed: 3"
+			break;
+		}
+		case 60:
+		{
+			oGame.turn_speed = -1
+			oGame.alarm[0] = -1
+            button.text = "Turn Speed: 0"
+			break;
+		}
+	}
 }
