@@ -10,9 +10,22 @@ hover = false
 x_pos = 0
 y_pos = 0
 developments = []
-
-function add_development(dev)
+units = []
+function add_development(dev, resource_dependent)
 {
-	if(dev.resource_type == resource.type) array_push(developments, dev)
-	else instance_destroy(dev)
+	if(resource_dependent)
+	{
+		if(dev.resource_type == resource.type) array_push(developments, dev)
+		else instance_destroy(dev)
+	}
+	else
+	{
+		array_push(developments, dev)
+	}
+	
+}
+
+function add_unit(unit)
+{
+	array_push(units, unit)
 }

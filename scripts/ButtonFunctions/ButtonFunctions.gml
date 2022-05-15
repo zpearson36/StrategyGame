@@ -8,7 +8,9 @@ function select_development(button)
 function place_development(object, tile)
 {
 	show_debug_message(tile)
-	tile.add_development(instance_create_layer(0, 0, "Developments", object))
+	var tmp = instance_create_layer(0, 0, "Developments", object)
+	tmp.tile = tile
+	tile.add_development(tmp, tmp.need_resource)
 }
 
 function endturn(button)
@@ -42,6 +44,20 @@ function t_speed(button)
 			break;
 		}
 		case 60:
+		{
+			oGame.turn_speed = 30
+			if(oGame.alarm[0] > 30) oGame.alarm[0] = 30
+            button.text = "Turn Speed: 4"
+			break;
+		}
+		case 30:
+		{
+			oGame.turn_speed = 1
+			oGame.alarm[0] = 1
+            button.text = "Turn Speed: 5"
+			break;
+		}
+		case 1:
 		{
 			oGame.turn_speed = -1
 			oGame.alarm[0] = -1

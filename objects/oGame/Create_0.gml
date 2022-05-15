@@ -25,6 +25,11 @@ tmp_btn.action = select_development
 tmp_btn.text = "Extractor"
 array_push(gui.button_array, tmp_btn)
 var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+tmp_btn.development = oFactory
+tmp_btn.action = select_development
+tmp_btn.text = "Factory"
+array_push(gui.button_array, tmp_btn)
+var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
 tmp_btn.action = endturn
 tmp_btn.text = "End Turn"
 array_push(gui.button_array, tmp_btn)

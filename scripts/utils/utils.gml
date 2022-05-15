@@ -26,3 +26,6 @@ function Resource(_type = RESOURSETYPES.NONE, _amount = 0) constructor
 		amount += add_amount
 	}
 }
+
+global.unit_cost = ds_map_create()
+global.unit_cost[? oTransporter] = 100

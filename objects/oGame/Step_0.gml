@@ -50,6 +50,10 @@ switch(turn_phase)
 		{
 			resource.collect(tile.resource.extract(extraction_amount))
 		}
+		with(oFactory)
+		{
+			turn()
+		}
 		turn_phase = TURNPHASE.BEGINNING
 		break;
 	}
