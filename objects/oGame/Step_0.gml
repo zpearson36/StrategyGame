@@ -1,34 +1,55 @@
 /// @description Insert description here
 // You can write your code in this editor
-switch(state)
+switch(turn_phase)
 {
-	case GAMESTATES.IDLE:
+	case TURNPHASE.BEGINNING:
 	{
-		if(development != undefined)
+		turn_phase = TURNPHASE.MAIN
+		break;
+	}
+	case TURNPHASE.MAIN:
+	{
+		switch(state)
 		{
-			state = GAMESTATES.PLACING
-			break;
+			case GAMESTATES.IDLE:
+			{
+				if(development != undefined)
+				{
+					state = GAMESTATES.PLACING
+					break;
+				}
+				break;
+			}
+			case GAMESTATES.PLACING:
+			{
+				if(mouse_check_button_pressed(mb_left))
+				{
+					show_debug_message(floor(mouse_x / WORLDTILEWIDTH))
+					show_debug_message(floor(mouse_y / WORLDTILEHEIGHT))
+					var tmp_tile = worldmap.get_tile(
+					                  floor(mouse_x / WORLDTILEWIDTH),
+					                  floor(mouse_y / WORLDTILEHEIGHT)
+									  )
+					place_development(development, tmp_tile)
+					development = undefined
+				}
+				if(mouse_check_button_pressed(mb_right))
+				{
+					development = undefined
+				}
+				if(development == undefined) state = GAMESTATES.IDLE
+				break;
+			}
 		}
 		break;
 	}
-	case GAMESTATES.PLACING:
+	case TURNPHASE.END:
 	{
-		if(mouse_check_button_pressed(mb_left))
+		with(oExtractor)
 		{
-			show_debug_message(floor(mouse_x / WORLDTILEWIDTH))
-			show_debug_message(floor(mouse_y / WORLDTILEHEIGHT))
-			var tmp_tile = worldmap.get_tile(
-			                  floor(mouse_x / WORLDTILEWIDTH),
-			                  floor(mouse_y / WORLDTILEHEIGHT)
-							  )
-			place_development(development, tmp_tile)
-			development = undefined
+			resource.collect(tile.resource.extract(extraction_amount))
 		}
-		if(mouse_check_button_pressed(mb_right))
-		{
-			development = undefined
-		}
-		if(development == undefined) state = GAMESTATES.IDLE
+		turn_phase = TURNPHASE.BEGINNING
 		break;
 	}
 }

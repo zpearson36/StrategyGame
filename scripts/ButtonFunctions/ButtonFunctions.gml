@@ -10,3 +10,8 @@ function place_development(object, tile)
 	show_debug_message(tile)
 	tile.add_development(instance_create_layer(0, 0, "Developments", object))
 }
+
+function endturn(button)
+{
+	oGame.turn_phase = TURNPHASE.END
+}
