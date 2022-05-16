@@ -29,3 +29,8 @@ function add_unit(unit)
 {
 	array_push(units, unit)
 }
+
+function get_development()
+{
+	return developments[0]
+}

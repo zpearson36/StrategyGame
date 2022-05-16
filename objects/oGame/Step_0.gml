@@ -25,8 +25,6 @@ switch(turn_phase)
 			{
 				if(mouse_check_button_pressed(mb_left))
 				{
-					show_debug_message(floor(mouse_x / WORLDTILEWIDTH))
-					show_debug_message(floor(mouse_y / WORLDTILEHEIGHT))
 					var tmp_tile = worldmap.get_tile(
 					                  floor(mouse_x / WORLDTILEWIDTH),
 					                  floor(mouse_y / WORLDTILEHEIGHT)
@@ -51,6 +49,10 @@ switch(turn_phase)
 			resource.collect(tile.resource.extract(extraction_amount))
 		}
 		with(oFactory)
+		{
+			turn()
+		}
+		with(oTransporter)
 		{
 			turn()
 		}

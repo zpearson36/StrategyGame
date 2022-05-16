@@ -22,4 +22,3 @@ switch(state)
 		break;
 	}
 }
-show_debug_message(tile.units)
