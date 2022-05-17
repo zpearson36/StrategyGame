@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+name = "Factory"
 need_resource = false
 tile = undefined
 build_speed = 10

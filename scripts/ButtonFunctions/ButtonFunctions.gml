@@ -1,5 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+
+//Main Buttons
 function select_development(button)
 {
 	oGame.development = button.development
@@ -56,5 +58,31 @@ function t_speed(button)
             button.text = "Turn Speed: 0"
 			break;
 		}
+	}
+}
+
+
+//Tile Buttons
+function display_developments(button)
+{
+	var dev_array = oGame.selected_tile.developments
+	for(var i = 0; i < array_length(dev_array); i++)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = dev_array[i].name
+		tmp_btn.height = 50
+		array_push(oGame.gui.tile_details_array, tmp_btn)
+	}
+}
+
+function display_units(button)
+{
+	var unit_array = oGame.selected_tile.units
+	for(var i = 0; i < array_length(unit_array); i++)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = unit_array[i].name
+		tmp_btn.height = 50
+		array_push(oGame.gui.tile_details_array, tmp_btn)
 	}
 }

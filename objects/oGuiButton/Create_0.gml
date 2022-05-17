@@ -12,3 +12,11 @@ function tmp_func(){return -1}
 action = tmp_func
 
 development = undefined
+
+enum BUTTONSTATES
+{
+	ACTIVE,
+	INACTIVE
+}
+
+state = BUTTONSTATES.ACTIVE

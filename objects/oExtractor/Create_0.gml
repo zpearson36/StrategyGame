@@ -1,5 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
+name = "Extractor"
 need_resource = true
 tile = undefined
 resource_type = RESOURSETYPES.IRON

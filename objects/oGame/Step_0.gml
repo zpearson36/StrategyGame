@@ -19,6 +19,20 @@ switch(turn_phase)
 					state = GAMESTATES.PLACING
 					break;
 				}
+				if(selected_tile != undefined)
+				{
+					//tile buttons
+					var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+					tmp_btn.action = display_developments
+					tmp_btn.text = "Developments"
+					array_push(gui.tile_button_array, tmp_btn)
+					var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+					tmp_btn.action = display_units
+					tmp_btn.text = "units"
+					array_push(gui.tile_button_array, tmp_btn)
+					state = GAMESTATES.TILEMENU
+					break;
+				}
 				break;
 			}
 			case GAMESTATES.PLACING:
@@ -37,6 +51,41 @@ switch(turn_phase)
 					development = undefined
 				}
 				if(development == undefined) state = GAMESTATES.IDLE
+				break;
+			}
+			case GAMESTATES.TILEMENU:
+			{
+				if(selected_tile == undefined)
+				{
+					state = GAMESTATES.IDLE
+					gui.state = GUISTATES.MAIN
+					break;
+				}
+				if(mouse_check_button_pressed(mb_right))
+				{
+					switch(gui.state)
+					{
+						case GUISTATES.TILE:
+						{
+							for(var i = 0; i < array_length(gui.tile_button_array); i++)
+							{
+								instance_destroy(gui.tile_button_array[i])
+							}
+							gui.tile_button_array = []
+							selected_tile = undefined
+							break;
+						}
+						case GUISTATES.TILEDETAILS:
+						{
+							for(var i = 0; i < array_length(gui.tile_details_array); i++)
+							{
+								instance_destroy(gui.tile_details_array[i])
+							}
+							gui.tile_details_array = []
+							break;
+						}
+					}
+				}
 				break;
 			}
 		}
