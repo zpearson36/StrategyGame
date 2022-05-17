@@ -32,8 +32,9 @@ switch(state)
 	}
 	case TRANSPORTSTATES.LOADING:
 	{
-		if(total_contents >= max_capacity)
+		if(total_contents >= max_capacity or destination.resource.amount == 0)
 		{
+			if(destination.resource.amount == 0) loading_loc = undefined
 			state = TRANSPORTSTATES.IDLE;
 			destination = delivery_loc
 			break;
