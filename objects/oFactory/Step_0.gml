@@ -4,7 +4,7 @@ switch(state)
 {
 	case FACTORYSTATES.IDLE:
 	{
-		if(resource.amount > global.unit_cost[? product])
+		if(resource.amount >= global.unit_cost[? product])
 		{
 			resource.extract(global.unit_cost[? product])
 			state = FACTORYSTATES.BUILDING

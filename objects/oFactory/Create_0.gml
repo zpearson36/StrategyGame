@@ -3,7 +3,7 @@
 need_resource = false
 tile = undefined
 build_speed = 10
-resource = new Resource(RESOURSETYPES.IRON, 150)
+resource = new Resource(RESOURSETYPES.IRON, 100)
 enum FACTORYSTATES
 {
 	IDLE,
