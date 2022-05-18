@@ -9,8 +9,13 @@ function select_development(button)
 
 function place_development(object, tile)
 {
-	var tmp = instance_create_layer(0, 0, "Developments", object)
+	var tmp = instance_create_layer(0, 0, "Developments", oConstructing)
+	var tmp2 = instance_create_layer(0, 0, "Developments", object)
 	tmp.tile = tile
+	tmp.development = object
+	tmp.need_resource = tmp2.need_resource
+	if(tmp.need_resource) tmp.resource_type = tmp2.resource_type
+	instance_destroy(tmp2)
 	tile.add_development(tmp, tmp.need_resource)
 }
 
@@ -64,7 +69,7 @@ function t_speed(button)
 //Tile Buttons
 function display_developments(button)
 {
-	var dev_array = oGame.selected_tile.developments
+	var dev_array = oGame.selected_tile.get_developments_array()
 	for(var i = 0; i < array_length(dev_array); i++)
 	{
 		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)

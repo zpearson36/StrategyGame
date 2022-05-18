@@ -9,20 +9,19 @@ if(resource.type == RESOURSETYPES.IRON) c_color = c_grey
 hover = false
 x_pos = 0
 y_pos = 0
-developments = []
+developments = ds_map_create()
 units = []
 function add_development(dev, resource_dependent)
 {
 	if(resource_dependent)
 	{
-		if(dev.resource_type == resource.type) array_push(developments, dev)
+		if(dev.resource_type == resource.type) developments[? dev.name] = dev
 		else instance_destroy(dev)
 	}
 	else
 	{
-		array_push(developments, dev)
+		developments[? dev.name] = dev
 	}
-	
 }
 
 function add_unit(unit)
@@ -32,5 +31,23 @@ function add_unit(unit)
 
 function get_development()
 {
-	return developments[0]
+	return get_developments_array()[0]
 }
+
+function remove_development(dev)
+{
+	ds_map_delete(developments, dev.name)
+}
+
+function get_developments_array()
+{
+	var tmp_array = []
+	var name_array = []
+	ds_map_keys_to_array(developments, name_array)
+	for(var i = 0; i < array_length(name_array); i++)
+	{
+		array_push(tmp_array, developments[? name_array[i]])
+	}
+	return tmp_array
+}
+

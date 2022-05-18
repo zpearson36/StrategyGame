@@ -1,30 +1,25 @@
 /// @description Insert description here
 // You can write your code in this editor
-name = "Transporter"  + string(instance_number(oTransporter))
+name = "Builder"  + string(instance_number(oTransporter))
 tile = undefined
 destination = undefined
-loading_loc = undefined
-delivery_loc = undefined
-max_capacity = 100
 contents = ds_map_create()
-contents[? RESOURSETYPES.IRON] = new Resource(RESOURSETYPES.IRON, 0)
 total_contents = 0
 loading_speed = 5
-enum TRANSPORTSTATES
+enum BUILDERSTATES
 {
 	IDLE,
 	MOVING,
-	LOADING,
-	UNLOADING
+	BUILDING
 }
 
-state = TRANSPORTSTATES.IDLE
+state = BUILDERSTATES.IDLE
 
 function turn()
 {
 	switch(state)
 	{
-		case TRANSPORTSTATES.MOVING:
+		case BUILDERSTATES.MOVING:
 		{
 			var _x = floor(x / WORLDTILEWIDTH)
 			var _y = floor(y / WORLDTILEHEIGHT)
@@ -40,18 +35,8 @@ function turn()
 			y = _y2 * WORLDTILEHEIGHT
 			break;
 		}
-		case TRANSPORTSTATES.LOADING:
+		case BUILDERSTATES.BUILDING:
 		{
-			var development = tile.get_development()
-			var res = contents[? development.resource.type]
-			res.collect(development.resource.extract(loading_speed))
-			break;
-		}
-		case TRANSPORTSTATES.UNLOADING:
-		{
-			var development = tile.get_development()
-			var res = contents[? development.resource.type]
-			development.resource.collect(res.extract(loading_speed))
 			break;
 		}
 	}

@@ -1,30 +1,39 @@
 /// @description Insert description here
 // You can write your code in this editor
-name = "Transporter"  + string(instance_number(oTransporter))
+name = "Worker"  + string(instance_number(oWorker))
 tile = undefined
-destination = undefined
-loading_loc = undefined
-delivery_loc = undefined
-max_capacity = 100
-contents = ds_map_create()
-contents[? RESOURSETYPES.IRON] = new Resource(RESOURSETYPES.IRON, 0)
-total_contents = 0
-loading_speed = 5
-enum TRANSPORTSTATES
+current_job = undefined
+job_map = ds_map_create()
+job_map[? "Transport"] = oTransporter
+job_map[? "Build"] = oBuilder
+
+enum WORKERSTATES
 {
 	IDLE,
 	MOVING,
-	LOADING,
-	UNLOADING
+	WORKING
 }
 
-state = TRANSPORTSTATES.IDLE
+state = WORKERSTATES.IDLE
+
+function set_job(job_type)
+{
+	current_job = instance_create_layer(x, y, "Units", job_map[? job_type])
+	current_job.worker = self
+}
+
+function remove_job()
+{
+	var tmp_job = current_job
+	current_job = undefined
+	instance_destroy(tmp_job)
+}
 
 function turn()
 {
 	switch(state)
 	{
-		case TRANSPORTSTATES.MOVING:
+		case WORKERSTATES.MOVING:
 		{
 			var _x = floor(x / WORLDTILEWIDTH)
 			var _y = floor(y / WORLDTILEHEIGHT)
@@ -40,18 +49,8 @@ function turn()
 			y = _y2 * WORLDTILEHEIGHT
 			break;
 		}
-		case TRANSPORTSTATES.LOADING:
+		case WORKERSTATES.WORKING:
 		{
-			var development = tile.get_development()
-			var res = contents[? development.resource.type]
-			res.collect(development.resource.extract(loading_speed))
-			break;
-		}
-		case TRANSPORTSTATES.UNLOADING:
-		{
-			var development = tile.get_development()
-			var res = contents[? development.resource.type]
-			development.resource.collect(res.extract(loading_speed))
 			break;
 		}
 	}
