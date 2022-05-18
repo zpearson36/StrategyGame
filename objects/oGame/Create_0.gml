@@ -19,6 +19,7 @@ turn_phase = TURNPHASE.BEGINNING
 state = GAMESTATES.IDLE
 development = undefined
 selected_tile = undefined
+selected_unit = undefined
 
 worldmap = instance_create_layer(x, y, "utils", oWorldMap)
 turn_speed = -1

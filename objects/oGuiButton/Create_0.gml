@@ -12,6 +12,8 @@ function tmp_func(){return -1}
 action = tmp_func
 
 development = undefined
+unit = undefined
+previous_button = undefined
 
 enum BUTTONSTATES
 {

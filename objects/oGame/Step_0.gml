@@ -84,6 +84,24 @@ switch(turn_phase)
 							gui.tile_details_array = []
 							break;
 						}
+						case GUISTATES.TRANSPORTSELECTION:
+						{
+							for(var i = 0; i < array_length(gui.trans_assignments); i++)
+							{
+								instance_destroy(gui.trans_assignments[i])
+							}
+							gui.trans_assignments = []
+							break;
+						}
+						case GUISTATES.TRANSDESTSELECTION:
+						{
+							for(var i = 0; i < array_length(gui.destination_array); i++)
+							{
+								instance_destroy(gui.destination_array[i])
+							}
+							gui.destination_array = []
+							break;
+						}
 					}
 				}
 				break;

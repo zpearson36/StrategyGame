@@ -32,4 +32,24 @@ switch(state)
 		}
 		break;
 	}
+	case GUISTATES.TRANSPORTSELECTION:
+	{
+		for(var i = 0; i < array_length(trans_assignments); i++)
+		{
+			var tmp_bttn = trans_assignments[i]
+			tmp_bttn.y_pos = 50 + (i * (tmp_bttn.height + 10))
+			tmp_bttn.state = BUTTONSTATES.ACTIVE
+		}
+		break;
+	}
+	case GUISTATES.TRANSDESTSELECTION:
+	{
+		for(var i = 0; i < array_length(destination_array); i++)
+		{
+			var tmp_bttn = destination_array[i]
+			tmp_bttn.y_pos = 50 + (i * (tmp_bttn.height + 10))
+			tmp_bttn.state = BUTTONSTATES.ACTIVE
+		}
+		break;
+	}
 }

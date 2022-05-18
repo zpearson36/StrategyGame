@@ -4,7 +4,20 @@ switch(state)
 {
 	case TRANSPORTSTATES.IDLE:
 	{
-		if(destination == undefined) break;
+		if(destination == undefined)
+		{
+			if(total_contents == 0 and loading_loc != undefined)
+			{
+				destination = loading_loc
+				break;
+			}
+			if(total_contents != 0 and delivery_loc != undefined)
+			{
+				destination = delivery_loc
+				break;
+			}
+			break;
+		}
 		if(x != destination.x or y != destination.y)
 		{
 			state = TRANSPORTSTATES.MOVING

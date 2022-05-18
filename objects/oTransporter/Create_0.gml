@@ -10,6 +10,7 @@ contents = ds_map_create()
 contents[? RESOURSETYPES.IRON] = new Resource(RESOURSETYPES.IRON, 0)
 total_contents = 0
 loading_speed = 5
+/*
 with(oFactory)
 {
 	other.delivery_loc = self
@@ -18,7 +19,7 @@ with(oExtractor)
 {
 	other.loading_loc = self
 }
-destination = loading_loc
+destination = loading_loc*/
 enum TRANSPORTSTATES
 {
 	IDLE,

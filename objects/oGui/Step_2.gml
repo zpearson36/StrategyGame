@@ -28,6 +28,30 @@ switch(state)
 		{
 			state = GUISTATES.MAIN
 		}
+		if(array_length(trans_assignments) != 0)
+		{
+			state = GUISTATES.TRANSPORTSELECTION
+		}
+		break;
+	}
+	case GUISTATES.TRANSPORTSELECTION:
+	{
+		if(array_length(trans_assignments) == 0)
+		{
+			state = GUISTATES.TILEDETAILS
+		}
+		if(array_length(destination_array) != 0)
+		{
+			state = GUISTATES.TRANSDESTSELECTION
+		}
+		break;
+	}
+	case GUISTATES.TRANSDESTSELECTION:
+	{
+		if(array_length(destination_array) == 0)
+		{
+			state = GUISTATES.TRANSPORTSELECTION
+		}
 		break;
 	}
 }

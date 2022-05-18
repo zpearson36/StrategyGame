@@ -61,7 +61,6 @@ function t_speed(button)
 	}
 }
 
-
 //Tile Buttons
 function display_developments(button)
 {
@@ -83,6 +82,79 @@ function display_units(button)
 		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
 		tmp_btn.text = unit_array[i].name
 		tmp_btn.height = 50
+		tmp_btn.action = show_assignments
+		tmp_btn.unit = unit_array[i]
 		array_push(oGame.gui.tile_details_array, tmp_btn)
 	}
+}
+
+//unit buttons
+function show_assignments(button)
+{
+	var loading = "None"
+	if(button.unit.loading_loc != undefined) loading = button.unit.loading_loc.name
+	
+	var unloading = "None"
+	if(button.unit.delivery_loc != undefined) unloading = button.unit.delivery_loc.name
+	
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "Loading Location: " + loading
+	tmp_btn.action = show_extractors
+	tmp_btn.unit = button.unit
+	array_push(oGame.gui.trans_assignments, tmp_btn)
+	
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "Delivery Location: " + unloading
+	tmp_btn.action = show_factory
+	tmp_btn.unit = button.unit
+	array_push(oGame.gui.trans_assignments, tmp_btn)
+}
+
+function show_extractors(button)
+{
+	with(oExtractor)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_loading
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
+}
+function show_factory(button)
+{
+	with(oFactory)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_dropoff
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
+}
+
+function set_loading(button)
+{
+	button.unit.loading_loc = button.development
+	button.previous_button.text = "Loading Location: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
+function set_dropoff(button)
+{
+	button.unit.delivery_loc = button.development
+	button.previous_button.text = "Delivery Location: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
 }
