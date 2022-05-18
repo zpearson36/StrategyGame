@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-name = "Factory"
+name = "Factory" + string(instance_number(oFactory))
 need_resource = false
 tile = undefined
 build_speed = 10

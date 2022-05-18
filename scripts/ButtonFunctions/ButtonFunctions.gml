@@ -112,6 +112,13 @@ function show_assignments(button)
 
 function show_extractors(button)
 {
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "None"
+	tmp_btn.development = undefined
+	tmp_btn.unit = button.unit
+	tmp_btn.action = set_loading_to_none
+	tmp_btn.previous_button = button
+	array_push(oGame.gui.destination_array, tmp_btn)
 	with(oExtractor)
 	{
 		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
@@ -125,6 +132,13 @@ function show_extractors(button)
 }
 function show_factory(button)
 {
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "None"
+	tmp_btn.development = undefined
+	tmp_btn.unit = button.unit
+	tmp_btn.action = set_dropoff_to_none
+	tmp_btn.previous_button = button
+	array_push(oGame.gui.destination_array, tmp_btn)
 	with(oFactory)
 	{
 		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
@@ -148,10 +162,32 @@ function set_loading(button)
 	oGame.gui.destination_array = []
 }
 
+function set_loading_to_none(button)
+{
+	button.unit.loading_loc = undefined
+	button.previous_button.text = "Loading Location: None"
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
 function set_dropoff(button)
 {
 	button.unit.delivery_loc = button.development
 	button.previous_button.text = "Delivery Location: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
+function set_dropoff_to_none(button)
+{
+	button.unit.delivery_loc = undefined
+	button.previous_button.text = "Delivery Location: None"
 	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
 	{
 		instance_destroy(oGame.gui.destination_array[i])

@@ -9,3 +9,4 @@ for(var i = 0; i < array_length(tmp_array); i++)
 {
 	total_contents += contents[? tmp_array[i]].amount
 }
+if(destination != loading_loc and destination != delivery_loc) destination = undefined

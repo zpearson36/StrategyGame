@@ -37,6 +37,11 @@ switch(state)
 	}
 	case TRANSPORTSTATES.MOVING:
 	{
+		if(destination == undefined)
+		{
+			state = TRANSPORTSTATES.IDLE;
+			break;
+		}
 		if(x == destination.x and y == destination.y)
 		{
 			state = TRANSPORTSTATES.IDLE;

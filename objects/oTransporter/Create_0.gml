@@ -1,6 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-name = "Transporter" 
+name = "Transporter"  + string(instance_number(oTransporter))
 tile = undefined
 destination = undefined
 loading_loc = undefined
