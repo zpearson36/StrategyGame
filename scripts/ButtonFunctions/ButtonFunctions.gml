@@ -154,6 +154,16 @@ function show_factory(button)
 		tmp_btn.previous_button = button
 		array_push(oGame.gui.destination_array, tmp_btn)
 	}
+	with(oConstructing)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_dropoff
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
 }
 
 function set_loading(button)

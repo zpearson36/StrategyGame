@@ -9,3 +9,4 @@ if(percentage_complete >= 100)
 	tile.remove_development(self)
 	instance_destroy()
 }
+

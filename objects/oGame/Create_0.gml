@@ -23,7 +23,9 @@ selected_unit = undefined
 
 worldmap = instance_create_layer(x, y, "utils", oWorldMap)
 turn_speed = -1
-
+var tmp_unit = instance_create_layer(worldmap.world_grid[# 10, 10].x_pos, worldmap.world_grid[# 10, 10].y_pos, "Units", oTransporter)
+tmp_unit.contents[? RESOURSETYPES.IRON].amount = 100
+//tmp_unit.tile = worldmap.world_grid[# 10, 10]
 //========GUI========
 gui = instance_create_layer(x, y, "utils", oGui)
 //main buttons
