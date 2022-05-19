@@ -1,11 +1,12 @@
 /// @description Insert description here
 // You can write your code in this editor
 name = "Builder"  + string(instance_number(oTransporter))
+unit_type = UNITTYPES.BUILDER
 tile = undefined
 destination = undefined
 contents = ds_map_create()
 total_contents = 0
-loading_speed = 5
+build_speed = 5
 enum BUILDERSTATES
 {
 	IDLE,
@@ -14,6 +15,7 @@ enum BUILDERSTATES
 }
 
 state = BUILDERSTATES.IDLE
+building = undefined
 
 function turn()
 {
@@ -25,8 +27,8 @@ function turn()
 			var _y = floor(y / WORLDTILEHEIGHT)
 			var _x2 = floor(x / WORLDTILEWIDTH) 
 			var _y2 = floor(y / WORLDTILEHEIGHT) - 1
-			var _xx = floor(destination.x / WORLDTILEWIDTH)
-			var _yy = floor(destination.y / WORLDTILEHEIGHT)
+			var _xx = floor(building.x / WORLDTILEWIDTH)
+			var _yy = floor(building.y / WORLDTILEHEIGHT)
 			
 			if(point_distance(_x - 1, _y, _xx, _yy) < point_distance(_x2, _y2, _xx, _yy)){_x2 = _x - 1; _y2 = _y;}
 			if(point_distance(_x + 1, _y, _xx, _yy) < point_distance(_x2, _y2, _xx, _yy)){_x2 = _x + 1; _y2 = _y;}
@@ -37,6 +39,8 @@ function turn()
 		}
 		case BUILDERSTATES.BUILDING:
 		{
+			if(building.requirements_met) building.build(build_speed)
+			if(building.get_percentage_complete() >= 100) building = undefined
 			break;
 		}
 	}

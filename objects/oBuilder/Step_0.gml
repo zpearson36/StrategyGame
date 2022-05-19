@@ -4,23 +4,26 @@ switch(state)
 {
 	case BUILDERSTATES.IDLE:
 	{
+		if(building == undefined) break
+		if(building != undefined) state = BUILDERSTATES.MOVING
 		break;
 	}
 	case BUILDERSTATES.MOVING:
 	{
-		if(destination == undefined)
+		if(building == undefined)
 		{
 			state = BUILDERSTATES.IDLE;
 			break;
 		}
-		if(x == destination.x and y == destination.y)
+		if(x == building.x and y == building.y)
 		{
-			state = BUILDERSTATES.IDLE;
+			state = BUILDERSTATES.BUILDING;
 		}
 		break;
 	}
 	case BUILDERSTATES.BUILDING:
 	{
+		if(building == undefined) state = BUILDERSTATES.IDLE
 		break;
 	}
 }

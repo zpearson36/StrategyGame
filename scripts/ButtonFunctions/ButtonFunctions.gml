@@ -96,23 +96,42 @@ function display_units(button)
 //unit buttons
 function show_assignments(button)
 {
-	var loading = "None"
-	if(button.unit.loading_loc != undefined) loading = button.unit.loading_loc.name
+	switch(button.unit.unit_type)
+	{
+		case UNITTYPES.TRANSPORTER:
+		{
+			var loading = "None"
+			if(button.unit.loading_loc != undefined) loading = button.unit.loading_loc.name
 	
-	var unloading = "None"
-	if(button.unit.delivery_loc != undefined) unloading = button.unit.delivery_loc.name
+			var unloading = "None"
+			if(button.unit.delivery_loc != undefined) unloading = button.unit.delivery_loc.name
 	
-	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
-	tmp_btn.text = "Loading Location: " + loading
-	tmp_btn.action = show_extractors
-	tmp_btn.unit = button.unit
-	array_push(oGame.gui.trans_assignments, tmp_btn)
+			var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+			tmp_btn.text = "Loading Location: " + loading
+			tmp_btn.action = show_extractors
+			tmp_btn.unit = button.unit
+			array_push(oGame.gui.trans_assignments, tmp_btn)
 	
-	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
-	tmp_btn.text = "Delivery Location: " + unloading
-	tmp_btn.action = show_factory
-	tmp_btn.unit = button.unit
-	array_push(oGame.gui.trans_assignments, tmp_btn)
+			var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+			tmp_btn.text = "Delivery Location: " + unloading
+			tmp_btn.action = show_factory
+			tmp_btn.unit = button.unit
+			array_push(oGame.gui.trans_assignments, tmp_btn)
+			break;
+		}
+		case UNITTYPES.BUILDER:
+		{
+			var building = "None"
+			if(button.unit.building != undefined) building = button.unit.building.name
+	
+			var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+			tmp_btn.text = "Building: " + building
+			tmp_btn.action = show_construction_sites
+			tmp_btn.unit = button.unit
+			array_push(oGame.gui.trans_assignments, tmp_btn)
+			break;
+		}
+	}
 }
 
 function show_extractors(button)
@@ -166,6 +185,28 @@ function show_factory(button)
 	}
 }
 
+function show_construction_sites(button)
+{
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "None"
+	tmp_btn.development = undefined
+	tmp_btn.unit = button.unit
+	tmp_btn.action = set_building_to_none
+	tmp_btn.previous_button = button
+	array_push(oGame.gui.destination_array, tmp_btn)
+	
+	with(oConstructing)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_building
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
+}
+
 function set_loading(button)
 {
 	button.unit.loading_loc = button.development
@@ -203,6 +244,28 @@ function set_dropoff_to_none(button)
 {
 	button.unit.delivery_loc = undefined
 	button.previous_button.text = "Delivery Location: None"
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
+function set_building(button)
+{
+	button.unit.building = button.development
+	button.previous_button.text = "Building: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
+function set_building_to_none(button)
+{
+	button.unit.building = undefined
+	button.previous_button.text = "Building: None"
 	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
 	{
 		instance_destroy(oGame.gui.destination_array[i])

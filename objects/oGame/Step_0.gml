@@ -115,15 +115,15 @@ switch(turn_phase)
 		{
 			resource.collect(tile.resource.extract(extraction_amount))
 		}
-		with(oConstructing)
-		{
-			turn()
-		}
 		with(oFactory)
 		{
 			turn()
 		}
 		with(oTransporter)
+		{
+			turn()
+		}
+		with(oBuilder)
 		{
 			turn()
 		}
