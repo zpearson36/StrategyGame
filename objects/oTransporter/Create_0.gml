@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 name = "Transporter"  + string(instance_number(oTransporter))
+piloted = false
 unit_type = UNITTYPES.TRANSPORTER
 tile = undefined
 destination = undefined

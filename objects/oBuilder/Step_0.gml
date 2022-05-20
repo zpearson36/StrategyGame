@@ -1,29 +1,46 @@
 /// @description Insert description here
 // You can write your code in this editor
-switch(state)
+if(piloted)
 {
-	case BUILDERSTATES.IDLE:
+	show_debug_message(state)
+	switch(state)
 	{
-		if(building == undefined) break
-		if(building != undefined) state = BUILDERSTATES.MOVING
-		break;
-	}
-	case BUILDERSTATES.MOVING:
-	{
-		if(building == undefined)
+		case BUILDERSTATES.IDLE:
 		{
-			state = BUILDERSTATES.IDLE;
+			with(oConstructing)
+			{
+				if(x == other.x and y == other.y)
+				{
+					other.building = self
+				}
+			}
+			if(destination != undefined){state = BUILDERSTATES.MOVING; break;}
+			if(building == undefined) break
 			break;
 		}
-		if(x == building.x and y == building.y)
+		case BUILDERSTATES.MOVING:
 		{
-			state = BUILDERSTATES.BUILDING;
+			if(destination == undefined)
+			{
+				state = BUILDERSTATES.IDLE;
+				break;
+			}
+			if(x == destination.x and y == destination.y)
+			{
+				destination = undefined
+				state = BUILDERSTATES.BUILDING;
+			}
+			break;
 		}
-		break;
+		case BUILDERSTATES.BUILDING:
+		{
+			if(building == undefined) state = BUILDERSTATES.IDLE
+			break;
+		}
 	}
-	case BUILDERSTATES.BUILDING:
-	{
-		if(building == undefined) state = BUILDERSTATES.IDLE
-		break;
-	}
+}
+else
+{
+	building = undefined
+	state = BUILDERSTATES.IDLE
 }

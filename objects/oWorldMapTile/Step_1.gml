@@ -1,5 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
+x = x_pos
+y = y_pos
 var tmp_array = get_developments_array()
 for(var i = 0; i < array_length(tmp_array); i++)
 {

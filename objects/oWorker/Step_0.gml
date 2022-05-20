@@ -4,7 +4,9 @@ switch(state)
 {
 	case WORKERSTATES.IDLE:
 	{
-		if(current_job != undefined) state = WORKERSTATES.WORKING
+		if(destination == undefined) break;
+		if(x != destination.x or y != destination.y){state = WORKERSTATES.MOVING; break;}
+		if(job != undefined){state = WORKERSTATES.WORKING; break;}
 		break;
 	}
 	case WORKERSTATES.MOVING:
@@ -16,13 +18,16 @@ switch(state)
 		}
 		if(x == destination.x and y == destination.y)
 		{
+			destination = undefined
 			state = WORKERSTATES.IDLE;
 		}
 		break;
 	}
 	case WORKERSTATES.WORKING:
 	{
-		if(current_job == undefined) state = WORKERSTATES.IDLE
+		if(job == undefined){ state = WORKERSTATES.IDLE; break;}
+		if(not job.piloted){ state = WORKERSTATES.IDLE; break;}
+		
 		break;
 	}
 }

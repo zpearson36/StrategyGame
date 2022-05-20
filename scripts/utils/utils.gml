@@ -12,7 +12,8 @@ enum RESOURSETYPES
 enum UNITTYPES
 {
 	TRANSPORTER,
-	BUILDER
+	BUILDER,
+	WORKER
 }
 
 function Resource(_type = RESOURSETYPES.NONE, _amount = 0) constructor
@@ -39,5 +40,6 @@ global.unit_cost[? oBuilder] = 100
 
 global.development_cost = ds_map_create()
 global.development_cost[? oExtractor] = 100
+global.development_cost[? oDepot] = 100
 global.development_cost[? oFactory] = 100
 global.development_cost[? oBuilderFactory] = 100

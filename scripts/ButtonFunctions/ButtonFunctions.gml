@@ -131,6 +131,49 @@ function show_assignments(button)
 			array_push(oGame.gui.trans_assignments, tmp_btn)
 			break;
 		}
+		case UNITTYPES.WORKER:
+		{
+			var job = "None"
+			if(button.unit.job != undefined) job = button.unit.job.name
+	
+			var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+			tmp_btn.text = "Job: " + job
+			tmp_btn.action = show_available_jobs
+			tmp_btn.unit = button.unit
+			array_push(oGame.gui.trans_assignments, tmp_btn)
+			break;
+		}
+	}
+}
+
+function show_available_jobs(button)
+{
+	var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+	tmp_btn.text = "None"
+	tmp_btn.development = undefined
+	tmp_btn.unit = button.unit
+	tmp_btn.action = set_job_to_none
+	tmp_btn.previous_button = button
+	array_push(oGame.gui.destination_array, tmp_btn)
+	with(oTransporter)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_job
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
+	with(oBuilder)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_job
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
 	}
 }
 
@@ -144,6 +187,16 @@ function show_extractors(button)
 	tmp_btn.previous_button = button
 	array_push(oGame.gui.destination_array, tmp_btn)
 	with(oExtractor)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_loading
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
+	with(oDepot)
 	{
 		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
 		tmp_btn.text = name
@@ -183,6 +236,16 @@ function show_factory(button)
 		tmp_btn.previous_button = button
 		array_push(oGame.gui.destination_array, tmp_btn)
 	}
+	with(oDepot)
+	{
+		var tmp_btn = instance_create_layer(x, y, "GUI", oGuiButton)
+		tmp_btn.text = name
+		tmp_btn.development = self
+	    tmp_btn.unit = button.unit
+		tmp_btn.action = set_dropoff
+		tmp_btn.previous_button = button
+		array_push(oGame.gui.destination_array, tmp_btn)
+	}
 }
 
 function show_construction_sites(button)
@@ -207,10 +270,32 @@ function show_construction_sites(button)
 	}
 }
 
+function set_job(button)
+{
+	button.unit.job = button.development
+	button.previous_button.text = "Job: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
 function set_loading(button)
 {
 	button.unit.loading_loc = button.development
 	button.previous_button.text = "Loading Location: " + button.development.name
+	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
+	{
+		instance_destroy(oGame.gui.destination_array[i])
+	}
+	oGame.gui.destination_array = []
+}
+
+function set_job_to_none(button)
+{
+	button.unit.job = undefined
+	button.previous_button.text = "Job: None"
 	for(var i = 0; i < array_length(oGame.gui.destination_array); i++)
 	{
 		instance_destroy(oGame.gui.destination_array[i])

@@ -104,6 +104,42 @@ switch(turn_phase)
 						}
 					}
 				}
+				if(selected_unit != undefined and mouse_check_button_pressed(mb_left))
+				{
+					with(oWorldMapTile)
+					{
+						if(hover)
+						{
+							other.selected_unit.destination = self
+							
+							for(var i = 0; i < array_length(other.gui.destination_array); i++)
+							{
+								instance_destroy(other.gui.destination_array[i])
+							}
+							other.gui.destination_array = []
+							
+							for(var i = 0; i < array_length(other.gui.trans_assignments); i++)
+							{
+								instance_destroy(other.gui.trans_assignments[i])
+							}
+							other.gui.trans_assignments = []
+							
+							for(var i = 0; i < array_length(other.gui.tile_details_array); i++)
+							{
+								instance_destroy(other.gui.tile_details_array[i])
+							}
+							other.gui.tile_details_array = []
+							
+							for(var i = 0; i < array_length(other.gui.tile_button_array); i++)
+							{
+								instance_destroy(other.gui.tile_button_array[i])
+							}
+							other.gui.tile_button_array = []
+							other.selected_tile = undefined
+							break;
+						}
+					}
+				}
 				break;
 			}
 		}
@@ -124,6 +160,10 @@ switch(turn_phase)
 			turn()
 		}
 		with(oBuilder)
+		{
+			turn()
+		}
+		with(oWorker)
 		{
 			turn()
 		}

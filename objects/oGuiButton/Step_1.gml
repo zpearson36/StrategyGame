@@ -4,7 +4,6 @@ switch(state)
 {
 	case BUTTONSTATES.ACTIVE:
 	{
-		
 		break;
 	}
 	case BUTTONSTATES.INACTIVE:

@@ -4,3 +4,4 @@ with(oConstructing)
 {
 	if(other.delivery_loc == self and requirements_met) other.delivery_loc = undefined
 }
+piloted = false

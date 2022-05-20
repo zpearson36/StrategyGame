@@ -1,11 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 name = "Worker"  + string(instance_number(oWorker))
+unit_type = UNITTYPES.WORKER
 tile = undefined
-current_job = undefined
-job_map = ds_map_create()
-job_map[? "Transport"] = oTransporter
-job_map[? "Build"] = oBuilder
+job = undefined
+destination = undefined
+//job_map = ds_map_create()
+//job_map[? "Transport"] = oTransporter
+//job_map[? "Build"] = oBuilder
 
 enum WORKERSTATES
 {
@@ -15,7 +17,7 @@ enum WORKERSTATES
 }
 
 state = WORKERSTATES.IDLE
-
+/*
 function set_job(job_type)
 {
 	current_job = instance_create_layer(x, y, "Units", job_map[? job_type])
@@ -28,7 +30,7 @@ function remove_job()
 	current_job = undefined
 	instance_destroy(tmp_job)
 }
-
+*/
 function turn()
 {
 	switch(state)

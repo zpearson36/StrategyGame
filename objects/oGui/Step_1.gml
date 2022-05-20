@@ -40,6 +40,7 @@ switch(state)
 			tmp_bttn.y_pos = 50 + (i * (tmp_bttn.height + 10))
 			tmp_bttn.state = BUTTONSTATES.ACTIVE
 		}
+		oGame.selected_unit = tmp_bttn.unit
 		break;
 	}
 	case GUISTATES.TRANSDESTSELECTION:
