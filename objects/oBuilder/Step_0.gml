@@ -2,7 +2,6 @@
 // You can write your code in this editor
 if(piloted)
 {
-	show_debug_message(state)
 	switch(state)
 	{
 		case BUILDERSTATES.IDLE:

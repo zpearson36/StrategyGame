@@ -9,6 +9,28 @@ switch(state)
 {
 	case WORKERSTATES.IDLE:
 	{
+		if(fuel.amount < refuling_threshold)
+		{
+			with(oDepot)
+			{
+				if(resource.amount > 0)
+				{
+					if(other.refuling_station == undefined) other.refuling_station = self
+					if(point_distance(x, y, other.x, other.y) < point_distance(other.x, other.y, other.refuling_station.x, other.refuling_station.y)) other.refuling_station = self
+				}
+			}
+			if(refuling_station == undefined)
+			{
+				with(oExtractor)
+				{
+					if(resource.amount > 0)
+					{
+						if(other.refuling_station == undefined) other.refuling_station = self
+						if(point_distance(x, y, other.x, other.y) < point_distance(other.x, other.y, other.refuling_station.x, other.refuling_station.y)) other.refuling_station = self
+					}
+				}
+			}
+		}
 		break;
 	}
 	case WORKERSTATES.MOVING:
