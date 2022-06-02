@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"sExtractor","path":"sprites/sExtractor/sExtractor.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "sExtractor",
     "tags": [],
     "resourceType": "GMSequence",

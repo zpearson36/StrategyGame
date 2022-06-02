@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"sDepot","path":"sprites/sDepot/sDepot.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "sDepot",
     "tags": [],
     "resourceType": "GMSequence",
